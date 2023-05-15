@@ -1,0 +1,28 @@
+POST http://localhost:3000/animals
+Content-Type: application/json
+
+{
+  "age": 1,
+  "kind": "catttttt",
+  "sound": "meow"
+}
+
+<> 2023-05-12T175812.201.json
+<> 2023-05-12T175623.201.json
+<> 2023-05-12T175621.201.json
+<> 2023-05-12T175614.201.json
+<> 2023-05-12T175509.201.json
+
+
+###
+
+GET http://localhost:3000/animals
+Accept: application/json
+
+<> 2023-05-12T175814.200.json
+<> 2023-05-12T175624.200.json
+<> 2023-05-12T175617.200.json
+<> 2023-05-12T175606.200.json
+
+
+###
