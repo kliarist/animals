@@ -1,10 +1,11 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize)]
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Animal {
     pub id: i8,
-    pub kind: String,
-    pub age: i8,
-    pub sound: String
+    pub species: String,
+    pub common_name: String,
+    pub habitat: String,
+    pub lifespan: i8,
+    pub is_endangered: bool
 }
