@@ -1,6 +1,5 @@
 use std::collections::HashMap;
 
-use crate::animal::Animal;
 use crate::model::animal::Animal;
 use crate::repository::animal_repository::AnimalRepository;
 

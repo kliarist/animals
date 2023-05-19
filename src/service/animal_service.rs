@@ -1,12 +1,8 @@
-use crate::animal_dto::{AnimalRequestDto, AnimalResponseDto};
-use crate::animal::Animal;
-use crate::animal_repository::AnimalRepository;
 use crate::dto::animal_request_dto::AnimalRequestDto;
 use crate::dto::animal_response_dto::AnimalResponseDto;
 use crate::model::animal::Animal;
 use crate::repository::animal_repository::AnimalRepository;
 
-#[derive(Clone)]
 pub struct AnimalService {
     repository: Box<dyn AnimalRepository + Send + Sync>,
 }
@@ -29,7 +25,7 @@ impl AnimalService {
     }
 
     pub fn save(&mut self, dto: AnimalRequestDto) -> i8 {
-        let mut animal = Animal::from(&dto);
+        let animal = Animal::from(&dto);
         return self.repository.save(animal);
     }
 

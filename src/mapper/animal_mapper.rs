@@ -1,5 +1,3 @@
-use crate::animal_dto::{AnimalRequestDto, AnimalResponseDto};
-use crate::animal::Animal;
 use crate::dto::animal_request_dto::AnimalRequestDto;
 use crate::dto::animal_response_dto::AnimalResponseDto;
 use crate::model::animal::Animal;
