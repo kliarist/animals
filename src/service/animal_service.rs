@@ -1,17 +1,19 @@
-use crate::dto::{AnimalRequestDto, AnimalResponseDto};
-use crate::model::Animal;
-use crate::repository::AnimalRepository;
+use crate::animal_dto::{AnimalRequestDto, AnimalResponseDto};
+use crate::animal::Animal;
+use crate::animal_repository::AnimalRepository;
+use crate::dto::animal_request_dto::AnimalRequestDto;
+use crate::dto::animal_response_dto::AnimalResponseDto;
+use crate::model::animal::Animal;
+use crate::repository::animal_repository::AnimalRepository;
 
 #[derive(Clone)]
 pub struct AnimalService {
-    repository: AnimalRepository,
+    repository: Box<dyn AnimalRepository + Send + Sync>,
 }
 
 impl AnimalService {
-    pub fn new() -> Self {
-        Self {
-            repository: AnimalRepository::new()
-        }
+    pub fn new(repository: Box<dyn AnimalRepository + Send + Sync>) -> Self {
+        Self { repository }
     }
 
     pub fn find_by_id(&self, id: i8) -> Option<AnimalResponseDto> {
@@ -28,10 +30,7 @@ impl AnimalService {
 
     pub fn save(&mut self, dto: AnimalRequestDto) -> i8 {
         let mut animal = Animal::from(&dto);
-        let new_id: i8 = self.repository.count() + 1;
-        animal.id = new_id;
-        self.repository.save(animal);
-        new_id
+        return self.repository.save(animal);
     }
 
     pub fn delete_by_id(&mut self, id: i8) -> Option<AnimalResponseDto> {

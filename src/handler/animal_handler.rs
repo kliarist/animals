@@ -5,7 +5,9 @@ use axum::Json;
 use serde_json::{json, Value};
 use tokio::sync::Mutex;
 
-use crate::dto::{AnimalRequestDto, AnimalResponseDto};
+use crate::animal_dto::{AnimalRequestDto, AnimalResponseDto};
+use crate::dto::animal_request_dto::AnimalRequestDto;
+use crate::dto::animal_response_dto::AnimalResponseDto;
 use crate::state::AppState;
 
 pub async fn find_all(State(app_state): State<Arc<Mutex<AppState>>>) -> (StatusCode, Json<Vec<AnimalResponseDto>>) {

@@ -2,17 +2,17 @@ use std::net::SocketAddr;
 use std::sync::Arc;
 use axum::{routing::{post, get, delete}, Router};
 use tokio::sync::Mutex;
-use crate::handler::{create, find_all, find_by_id, delete_by_id};
+use crate::handler::animal_handler::{create, delete_by_id, find_all, find_by_id};
 
 use crate::state::AppState;
 
+mod state;
 mod dto;
-mod model;
+mod service;
 mod mapper;
 mod handler;
+mod model;
 mod repository;
-mod service;
-mod state;
 
 #[tokio::main]
 async fn main() {
