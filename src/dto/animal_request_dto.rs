@@ -10,7 +10,7 @@ pub struct AnimalRequestDto {
     #[validate(length(min = 3, message = "Habitat name must be at least 3 characters long"))]
     pub habitat: String,
     #[validate(range(min = 1, max = 100, message = "Lifespan must be between 1 and 100 years"))]
-    pub lifespan: i8,
+    pub lifespan: i32,
     pub is_endangered: bool
 }
 
@@ -28,7 +28,7 @@ impl AnimalRequestDto {
         &self.habitat
     }
 
-    pub fn lifespan(&self) -> i8 {
+    pub fn lifespan(&self) -> i32 {
         self.lifespan
     }
 

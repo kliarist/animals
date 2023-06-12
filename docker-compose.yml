@@ -1,0 +1,20 @@
+version: '3.8'
+
+networks:
+  animals:
+
+services:
+
+  database:
+    image: 'postgres:latest'
+    hostname: database
+    container_name: database
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=darthvader
+      - POSTGRES_PASSWORD=iamyourfather
+      - POSTGRES_DB=animals
+    networks:
+        - animals
