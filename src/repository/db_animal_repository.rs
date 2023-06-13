@@ -22,7 +22,7 @@ impl DbAnimalRepository {
 }
 
 impl AnimalRepository for DbAnimalRepository {
-    fn find_by_id(&self, animal_id: i64) -> Option<Animal> {
+    fn find_by_id(&self, animal_id: i32) -> Option<Animal> {
         let db_conn = &mut self.db_pool.get().unwrap();
         return animals
             .filter(id.eq(animal_id))
@@ -35,10 +35,10 @@ impl AnimalRepository for DbAnimalRepository {
         return animals.load::<Animal>(db_conn).unwrap();
     }
 
-    fn save(&self, animal: Animal) -> i64 {
+    fn save(&self, animal: Animal) -> i32 {
         let db_conn = &mut self.db_pool.get().unwrap();
-        let i = animals.select(count_star()).first::<i64>(db_conn).unwrap() as i64;
-        let new_id: i64 = i + 1;
+        let i = self.count() as i32;
+        let new_id: i32 = i + 1;
 
         let new_animal = Animal::new(new_id, animal.species().to_string(),
                                      animal.common_name().to_string(), animal.habitat().to_string(),
@@ -53,14 +53,14 @@ impl AnimalRepository for DbAnimalRepository {
         new_id
     }
 
-    fn delete_by_id(&self, animal_id: i64) -> Option<Animal> {
+    fn delete_by_id(&self, animal_id: i32) -> Option<Animal> {
         let db_conn = &mut self.db_pool.get().unwrap();
         let animal = animals
             .filter(id.eq(animal_id))
             .first::<Animal>(db_conn)
             .ok();
 
-        diesel::delete(animals.filter(id.eq(animal_id)))
+        let _ = diesel::delete(animals.filter(id.eq(animal_id)))
             .execute(db_conn);
         animal
     }

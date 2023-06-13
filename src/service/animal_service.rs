@@ -13,7 +13,7 @@ impl AnimalService {
         Self { repository }
     }
 
-    pub fn find_by_id(&self, id: i64) -> Option<AnimalResponseDto> {
+    pub fn find_by_id(&self, id: i32) -> Option<AnimalResponseDto> {
         return self.repository
             .find_by_id(id)
             .map(|animal| { AnimalResponseDto::from(&animal) });
@@ -25,12 +25,12 @@ impl AnimalService {
             .collect();
     }
 
-    pub fn save(&mut self, dto: AnimalRequestDto) -> i64 {
+    pub fn save(&mut self, dto: AnimalRequestDto) -> i32 {
         let animal = Animal::from(&dto);
         return self.repository.save(animal);
     }
 
-    pub fn delete_by_id(&mut self, id: i64) -> Option<AnimalResponseDto> {
+    pub fn delete_by_id(&mut self, id: i32) -> Option<AnimalResponseDto> {
         return self.repository
             .delete_by_id(id)
             .map(|animal| { AnimalResponseDto::from(&animal) });
