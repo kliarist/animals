@@ -5,7 +5,7 @@
 // 
 // #[derive(Clone)]
 // pub struct InMemoryAnimalRepository {
-//     animals: HashMap<i32, Animal>,
+//     animals: HashMap<i64, Animal>,
 // }
 // 
 // impl InMemoryAnimalRepository {
@@ -17,7 +17,7 @@
 // }
 // 
 // impl AnimalRepository for InMemoryAnimalRepository {
-//     fn find_by_id(&self, id: i32) -> Option<&Animal> {
+//     fn find_by_id(&self, id: i64) -> Option<&Animal> {
 //         return self.animals.get(&id);
 //     }
 // 
@@ -25,8 +25,8 @@
 //         return self.animals.values().cloned().collect::<Vec<Animal>>();
 //     }
 // 
-//     fn save(&mut self, animal: Animal) -> i32 {
-//         let new_id: i32 = self.animals.len() as i32 + 1;
+//     fn save(&mut self, animal: Animal) -> i64 {
+//         let new_id: i64 = self.animals.len() as i64 + 1;
 //         let new_animal = Animal::new(new_id, animal.species().to_string(),
 //                                      animal.common_name().to_string(), animal.habitat().to_string(),
 //                                      animal.lifespan(), animal.is_endangered());
@@ -34,11 +34,11 @@
 //         new_id
 //     }
 // 
-//     fn delete_by_id(&mut self, id: i32) -> Option<Animal> {
+//     fn delete_by_id(&mut self, id: i64) -> Option<Animal> {
 //         return self.animals.remove(&id);
 //     }
 // 
-//     fn count(&self) -> i32 {
-//         return self.animals.len() as i32;
+//     fn count(&self) -> i64 {
+//         return self.animals.len() as i64;
 //     }
 // }

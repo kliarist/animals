@@ -7,16 +7,16 @@ use crate::schemas::schema::animals;
 #[diesel(table_name = animals)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Animal {
-    id: i32,
+    id: i64,
     species: String,
     common_name: String,
     habitat: String,
-    lifespan: i32,
+    lifespan: i64,
     is_endangered: bool
 }
 
 impl Animal {
-    pub fn new(id: i32, species: String, common_name: String, habitat: String, lifespan: i32, is_endangered: bool) -> Self {
+    pub fn new(id: i64, species: String, common_name: String, habitat: String, lifespan: i64, is_endangered: bool) -> Self {
         Self {
             id,
             species,
@@ -27,7 +27,7 @@ impl Animal {
         }
     }
 
-    pub fn id(&self) -> i32 {
+    pub fn id(&self) -> i64 {
         self.id
     }
 
@@ -43,7 +43,7 @@ impl Animal {
         &self.habitat
     }
 
-    pub fn lifespan(&self) -> i32 {
+    pub fn lifespan(&self) -> i64 {
         self.lifespan
     }
 

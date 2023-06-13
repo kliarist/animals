@@ -13,18 +13,18 @@ pub async fn find_all(State(app_state): State<Arc<Mutex<AppState>>>) -> (StatusC
     (StatusCode::OK, Json(app_state.lock().await.animal_service.find_all()))
 }
 
-pub async fn find_by_id(State(app_state): State<Arc<Mutex<AppState>>>, Path(id): Path<i32>) -> (StatusCode, Json<Value>) {
+pub async fn find_by_id(State(app_state): State<Arc<Mutex<AppState>>>, Path(id): Path<i64>) -> (StatusCode, Json<Value>) {
     return app_state.lock().await.animal_service
         .find_by_id(id)
         .map_or_else(|| (StatusCode::NOT_FOUND, Json(json!({"message":"animal not found"}))),
                      |animal| (StatusCode::OK, Json(json!(AnimalResponseDto::from(animal)))));
 }
 
-pub async fn create(app_state: State<Arc<Mutex<AppState>>>, Json(dto): Json<AnimalRequestDto>) -> (StatusCode, Json<i32>) {
+pub async fn create(app_state: State<Arc<Mutex<AppState>>>, Json(dto): Json<AnimalRequestDto>) -> (StatusCode, Json<i64>) {
     return (StatusCode::CREATED, Json(app_state.lock().await.animal_service.save(dto)))
 }
 
-pub async fn delete_by_id(State(app_state): State<Arc<Mutex<AppState>>>, Path(id): Path<i32>) -> StatusCode {
+pub async fn delete_by_id(State(app_state): State<Arc<Mutex<AppState>>>, Path(id): Path<i64>) -> StatusCode {
     return app_state.lock().await.animal_service
         .delete_by_id(id)
         .map_or_else(|| StatusCode::NOT_FOUND, |_dto| {StatusCode::OK});
