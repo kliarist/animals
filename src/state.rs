@@ -1,15 +1,19 @@
-use crate::repository::in_memory_animal_repository::InMemoryAnimalRepository;
+use crate::db_util::establish_connection;
+
+use crate::repository::db_animal_repository::DbAnimalRepository;
 use crate::service::animal_service::AnimalService;
 
 pub struct AppState {
-    pub animal_service: AnimalService
+    pub animal_service: AnimalService,
 }
 
 impl AppState {
     pub fn new() -> Self {
-        let animal_repository = Box::new(InMemoryAnimalRepository::new());
+        let db_pool = establish_connection();
+        let animal_repository = DbAnimalRepository::new(db_pool.clone());
+
         Self {
-            animal_service: AnimalService::new(animal_repository)
+            animal_service: AnimalService::new(animal_repository),
         }
     }
 }

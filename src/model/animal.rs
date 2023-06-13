@@ -1,17 +1,22 @@
-use serde::{Deserialize, Serialize};
+use diesel::{Queryable, Selectable, Insertable};
+use serde::{Serialize, Deserialize};
+use crate::schemas::schema::animals;
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+
+#[derive(Serialize, Deserialize, Queryable, Selectable, Insertable)]
+#[diesel(table_name = animals)]
+#[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Animal {
-    id: i8,
+    id: i64,
     species: String,
     common_name: String,
     habitat: String,
-    lifespan: i8,
+    lifespan: i64,
     is_endangered: bool
 }
 
 impl Animal {
-    pub fn new(id: i8, species: String, common_name: String, habitat: String, lifespan: i8, is_endangered: bool) -> Self {
+    pub fn new(id: i64, species: String, common_name: String, habitat: String, lifespan: i64, is_endangered: bool) -> Self {
         Self {
             id,
             species,
@@ -22,7 +27,7 @@ impl Animal {
         }
     }
 
-    pub fn id(&self) -> i8 {
+    pub fn id(&self) -> i64 {
         self.id
     }
 
@@ -38,7 +43,7 @@ impl Animal {
         &self.habitat
     }
 
-    pub fn lifespan(&self) -> i8 {
+    pub fn lifespan(&self) -> i64 {
         self.lifespan
     }
 

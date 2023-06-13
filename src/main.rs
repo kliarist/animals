@@ -13,6 +13,8 @@ mod mapper;
 mod handler;
 mod model;
 mod repository;
+mod schemas;
+mod db_util;
 
 #[tokio::main]
 async fn main() {
