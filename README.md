@@ -31,7 +31,7 @@ To rollback migrations use `diesel migration redo`.
 ### Goals for this project
 - [x] CRUD requests
 - [x] Connect to a database
-- [ ] Externalise configuration/properties
+- [x] Externalise configuration/properties
 - [ ] Logging
 - [ ] Add JWT security
 - [ ] Global and local api error handling
@@ -39,5 +39,10 @@ To rollback migrations use `diesel migration redo`.
 
 ### Useful links
 
+✓ [Axum](https://github.com/tokio-rs/axum)
+
 ✓ [Diesel](https://diesel.rs/guides/getting-started)
+
+✓ [Envconfig](https://docs.rs/envconfig/latest/envconfig/)
+
 
