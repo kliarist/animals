@@ -7,7 +7,7 @@ use tokio::sync::Mutex;
 
 use crate::dto::animal_request_dto::AnimalRequestDto;
 use crate::dto::animal_response_dto::AnimalResponseDto;
-use crate::state::AppState;
+use crate::app_state::AppState;
 
 pub async fn find_all(State(app_state): State<Arc<Mutex<AppState>>>) -> (StatusCode, Json<Vec<AnimalResponseDto>>) {
     (StatusCode::OK, Json(app_state.lock().await.animal_service.find_all()))

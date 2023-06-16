@@ -2,7 +2,6 @@ use diesel::{Queryable, Selectable, Insertable};
 use serde::{Serialize, Deserialize};
 use crate::schemas::schema::animals;
 
-
 #[derive(Serialize, Deserialize, Queryable, Selectable, Insertable)]
 #[diesel(table_name = animals)]
 #[diesel(check_for_backend(diesel::pg::Pg))]

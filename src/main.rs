@@ -1,12 +1,15 @@
 use std::net::SocketAddr;
 use std::sync::Arc;
 use axum::{routing::{post, get, delete}, Router};
+use dotenvy::dotenv;
+use envconfig::Envconfig;
 use tokio::sync::Mutex;
+use crate::app_config::AppConfig;
 use crate::handler::animal_handler::{create, delete_by_id, find_all, find_by_id};
 
-use crate::state::AppState;
+use crate::app_state::AppState;
 
-mod state;
+mod app_state;
 mod dto;
 mod service;
 mod mapper;
@@ -15,11 +18,13 @@ mod model;
 mod repository;
 mod schemas;
 mod db_util;
+mod app_config;
 
 #[tokio::main]
 async fn main() {
-
-    let app_state = Arc::new(Mutex::new(AppState::new()));
+    dotenv().ok();
+    let config = AppConfig::init_from_env().unwrap();
+    let app_state = Arc::new(Mutex::new(AppState::new(&config)));
 
     let app = Router::new()
         .route("/animals", post(create))
@@ -28,7 +33,7 @@ async fn main() {
         .route("/animals/:animal_id", delete(delete_by_id))
         .with_state(app_state);
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let addr = SocketAddr::from(([127, 0, 0, 1], config.server_port));
 
     println!("listening on {}", addr);
 
