@@ -11,12 +11,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/animals",
+					"raw": "http://localhost:8080/animals",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"animals"
 					]
@@ -30,12 +30,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/animals/3",
+					"raw": "http://localhost:8080/animals/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"animals",
 						"3"
@@ -59,12 +59,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/animals",
+					"raw": "http://localhost:8080/animals",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"animals"
 					]
@@ -87,12 +87,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/animals/5",
+					"raw": "http://localhost:8080/animals/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"animals",
 						"5"
