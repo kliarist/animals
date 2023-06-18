@@ -1,5 +1,6 @@
-use crate::app_config::AppConfig;
-use crate::db_util::establish_connection;
+use diesel::PgConnection;
+use diesel::r2d2::ConnectionManager;
+use r2d2::Pool;
 
 use crate::repository::db_animal_repository::DbAnimalRepository;
 use crate::service::animal_service::AnimalService;
@@ -9,9 +10,9 @@ pub struct AppState {
 }
 
 impl AppState {
-    pub fn new(app_config: &AppConfig) -> Self {
-        let db_pool = establish_connection(&app_config.database_url);
-        let animal_repository = DbAnimalRepository::new(db_pool.clone());
+    pub fn new(db_pool: Pool<ConnectionManager<PgConnection>>) -> Self {
+
+        let animal_repository = DbAnimalRepository::new(db_pool);
 
         Self {
             animal_service: AnimalService::new(animal_repository),
