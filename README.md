@@ -32,10 +32,11 @@ To rollback migrations use `diesel migration redo`.
 - [x] CRUD requests
 - [x] Connect to a database
 - [x] Externalise configuration/properties
+- [x] Dockerise
 - [ ] Logging
-- [ ] Add JWT security
 - [ ] Global and local api error handling
-- [ ] Dockerise
+- [ ] Add JWT security
+- [ ] Release process
 
 ### Useful links
 
