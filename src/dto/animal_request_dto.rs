@@ -1,7 +1,7 @@
 use serde::{Deserialize};
 use validator::{Validate};
 
-#[derive(Deserialize, Validate)]
+#[derive(Deserialize, Validate, Debug)]
 pub struct AnimalRequestDto {
     #[validate(length(min = 3, message = "Species name must be at least 3 characters long"))]
     pub species: String,

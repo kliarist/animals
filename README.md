@@ -38,7 +38,7 @@ To build the docker image use `docker build -t animals-api .`.
 - [x] Connect to a database
 - [x] Externalise configuration/properties
 - [x] Dockerise
-- [ ] Logging
+- [x] Logging
 - [ ] Global and local api error handling
 - [ ] Add JWT security
 - [ ] Release process
