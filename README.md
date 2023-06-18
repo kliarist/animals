@@ -4,6 +4,8 @@ A rust crud rest api poc using:
 
 * axum
 * diesel
+* envconfig
+* env_logger
 * postgres
 
 ### Build
@@ -13,7 +15,8 @@ Build using `cargo build --release`.
 Run using `./target/release/animals-api`.
 
 ### Development
-Bring the postgres docker container up by `docker-compose up -d database`. Check Diesel documentation for installing the `diesel cli` and `libmq`.
+Bring the postgres docker container up by `docker-compose up -d database`. 
+Check Diesel documentation for installing the `diesel cli` and `libmq`.
 
 For local development it makes sense to use `cargo-watch`.
 
@@ -50,5 +53,7 @@ To build the docker image use `docker build -t animals-api .`.
 ✓ [Diesel](https://diesel.rs/guides/getting-started)
 
 ✓ [Envconfig](https://docs.rs/envconfig/latest/envconfig/)
+
+✓ [Env_logger](https://docs.rs/env_logger/0.10.0/env_logger/#)
 
 
