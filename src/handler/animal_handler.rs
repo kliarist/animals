@@ -14,10 +14,10 @@ pub async fn find_all(
     State(app_state): State<Arc<Mutex<AppState>>>,
 ) -> (StatusCode, Json<Vec<AnimalResponseDto>>) {
     info!("Requesting find_all");
-    return (
+    (
         StatusCode::OK,
         Json(app_state.lock().await.animal_service.find_all()),
-    );
+    )
 }
 
 pub async fn find_by_id(
@@ -25,7 +25,7 @@ pub async fn find_by_id(
     Path(id): Path<i32>,
 ) -> (StatusCode, Json<Value>) {
     info!("Requesting find_by_id with id: {}", id);
-    return app_state
+    app_state
         .lock()
         .await
         .animal_service
@@ -37,8 +37,8 @@ pub async fn find_by_id(
                     Json(json!({"message":"animal not found"})),
                 )
             },
-            |animal| (StatusCode::OK, Json(json!(AnimalResponseDto::from(animal)))),
-        );
+            |animal| (StatusCode::OK, Json(json!(animal))),
+        )
 }
 
 pub async fn create(
@@ -46,10 +46,10 @@ pub async fn create(
     Json(dto): Json<AnimalRequestDto>,
 ) -> (StatusCode, Json<i32>) {
     info!("Requesting create with dto: {:?}", &dto);
-    return (
+    (
         StatusCode::CREATED,
         Json(app_state.lock().await.animal_service.save(dto)),
-    );
+    )
 }
 
 pub async fn delete_by_id(
@@ -57,10 +57,10 @@ pub async fn delete_by_id(
     Path(id): Path<i32>,
 ) -> StatusCode {
     info!("Requesting delete_by_id with id: {}", id);
-    return app_state
+    app_state
         .lock()
         .await
         .animal_service
         .delete_by_id(id)
-        .map_or_else(|| StatusCode::NOT_FOUND, |_dto| StatusCode::OK);
+        .map_or_else(|| StatusCode::NOT_FOUND, |_dto| StatusCode::OK)
 }

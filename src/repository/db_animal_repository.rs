@@ -22,15 +22,15 @@ impl DbAnimalRepository {
 impl AnimalRepository for DbAnimalRepository {
     fn find_by_id(&self, animal_id: i32) -> Option<Animal> {
         let db_conn = &mut self.db_pool.get().unwrap();
-        return animals
+        animals
             .filter(id.eq(animal_id))
             .first::<Animal>(db_conn)
-            .ok();
+            .ok()
     }
 
     fn find_all(&self) -> Vec<Animal> {
         let db_conn = &mut self.db_pool.get().unwrap();
-        return animals.load::<Animal>(db_conn).unwrap();
+        animals.load::<Animal>(db_conn).unwrap()
     }
 
     fn save(&self, animal: Animal) -> i32 {
