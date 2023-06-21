@@ -1,10 +1,10 @@
 use axum::extract::{Path, State};
 use axum::http::StatusCode;
 use axum::Json;
-use log::info;
 use serde_json::{json, Value};
 use std::sync::Arc;
 use tokio::sync::Mutex;
+use tracing::info;
 
 use crate::config::app_state::AppState;
 use crate::dto::animal_request_dto::AnimalRequestDto;

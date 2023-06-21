@@ -1,18 +1,20 @@
-use crate::config::app_settings::AppSettings;
-use crate::config::app_state::AppState;
-use crate::db_util::{establish_connection, run_pending_migrations};
-use crate::handler::animal_handler::{create, delete_by_id, find_all, find_by_id};
+use std::net::SocketAddr;
+use std::sync::Arc;
+
 use axum::{
     routing::{delete, get, post},
     Router,
 };
 use dotenvy::dotenv;
-use env_logger::Env;
 use envconfig::Envconfig;
-use log::info;
-use std::net::SocketAddr;
-use std::sync::Arc;
 use tokio::sync::Mutex;
+use tracing::{debug, info};
+use tracing_subscriber::fmt;
+
+use crate::config::app_settings::AppSettings;
+use crate::config::app_state::AppState;
+use crate::db_util::{establish_connection, run_pending_migrations};
+use crate::handler::animal_handler::{create, delete_by_id, find_all, find_by_id};
 
 mod config;
 mod db_util;
@@ -30,8 +32,9 @@ async fn main() {
     dotenv().ok();
     let app_settings = AppSettings::init_from_env().unwrap();
 
-    // initialize logger
-    env_logger::Builder::from_env(Env::default().default_filter_or("info")).init();
+    // initialize tracing subscriber
+    fmt::init();
+
     info!(
         "Logger initialized with level \"{}\"",
         app_settings.log_level()
