@@ -1,6 +1,5 @@
 use crate::model::animal::Animal;
 
-
 pub trait AnimalRepository {
     fn find_by_id(&self, id: i32) -> Option<Animal>;
 

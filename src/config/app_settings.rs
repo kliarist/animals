@@ -13,7 +13,6 @@ pub struct AppSettings {
 }
 
 impl AppSettings {
-
     pub fn server_port(&self) -> u16 {
         self.server_port
     }

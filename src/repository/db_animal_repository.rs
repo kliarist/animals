@@ -1,4 +1,4 @@
-use diesel::dsl::{count_star};
+use diesel::dsl::count_star;
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use diesel::r2d2::{ConnectionManager, Pool};
@@ -10,14 +10,12 @@ use crate::schemas::schema::animals::{id, table};
 
 #[derive(Clone)]
 pub struct DbAnimalRepository {
-    db_pool: Pool<ConnectionManager<PgConnection>>
+    db_pool: Pool<ConnectionManager<PgConnection>>,
 }
 
 impl DbAnimalRepository {
     pub fn new(db_pool: Pool<ConnectionManager<PgConnection>>) -> Self {
-        Self {
-            db_pool
-        }
+        Self { db_pool }
     }
 }
 
@@ -27,7 +25,7 @@ impl AnimalRepository for DbAnimalRepository {
         return animals
             .filter(id.eq(animal_id))
             .first::<Animal>(db_conn)
-            .ok()
+            .ok();
     }
 
     fn find_all(&self) -> Vec<Animal> {
@@ -40,9 +38,14 @@ impl AnimalRepository for DbAnimalRepository {
         let i = self.count() as i32;
         let new_id: i32 = i + 1;
 
-        let new_animal = Animal::new(new_id, animal.species().to_string(),
-                                     animal.common_name().to_string(), animal.habitat().to_string(),
-                                     animal.lifespan(), animal.is_endangered());
+        let new_animal = Animal::new(
+            new_id,
+            animal.species().to_string(),
+            animal.common_name().to_string(),
+            animal.habitat().to_string(),
+            animal.lifespan(),
+            animal.is_endangered(),
+        );
 
         diesel::insert_into(table)
             .values(new_animal)
@@ -60,8 +63,7 @@ impl AnimalRepository for DbAnimalRepository {
             .first::<Animal>(db_conn)
             .ok();
 
-        let _ = diesel::delete(animals.filter(id.eq(animal_id)))
-            .execute(db_conn);
+        let _ = diesel::delete(animals.filter(id.eq(animal_id))).execute(db_conn);
         animal
     }
 

@@ -1,4 +1,4 @@
-use serde::{Serialize};
+use serde::Serialize;
 
 #[derive(Serialize)]
 pub struct AnimalResponseDto {
@@ -7,5 +7,5 @@ pub struct AnimalResponseDto {
     pub common_name: String,
     pub habitat: String,
     pub lifespan: i32,
-    pub is_endangered: bool
+    pub is_endangered: bool,
 }

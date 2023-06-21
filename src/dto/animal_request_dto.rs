@@ -1,5 +1,5 @@
-use serde::{Deserialize};
-use validator::{Validate};
+use serde::Deserialize;
+use validator::Validate;
 
 #[derive(Deserialize, Validate, Debug)]
 pub struct AnimalRequestDto {
@@ -9,13 +9,16 @@ pub struct AnimalRequestDto {
     pub common_name: String,
     #[validate(length(min = 3, message = "Habitat name must be at least 3 characters long"))]
     pub habitat: String,
-    #[validate(range(min = 1, max = 100, message = "Lifespan must be between 1 and 100 years"))]
+    #[validate(range(
+        min = 1,
+        max = 100,
+        message = "Lifespan must be between 1 and 100 years"
+    ))]
     pub lifespan: i32,
-    pub is_endangered: bool
+    pub is_endangered: bool,
 }
 
 impl AnimalRequestDto {
-
     pub fn species(&self) -> &String {
         &self.species
     }

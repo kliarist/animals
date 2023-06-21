@@ -1,25 +1,28 @@
-use std::net::SocketAddr;
-use std::sync::Arc;
-use axum::{routing::{post, get, delete}, Router};
+use crate::config::app_settings::AppSettings;
+use crate::config::app_state::AppState;
+use crate::db_util::{establish_connection, run_pending_migrations};
+use crate::handler::animal_handler::{create, delete_by_id, find_all, find_by_id};
+use axum::{
+    routing::{delete, get, post},
+    Router,
+};
 use dotenvy::dotenv;
 use env_logger::Env;
 use envconfig::Envconfig;
 use log::info;
+use std::net::SocketAddr;
+use std::sync::Arc;
 use tokio::sync::Mutex;
-use crate::handler::animal_handler::{create, delete_by_id, find_all, find_by_id};
-use crate::config::app_settings::AppSettings;
-use crate::config::app_state::AppState;
-use crate::db_util::{establish_connection, run_pending_migrations};
 
 mod config;
 mod db_util;
 mod dto;
-mod service;
-mod mapper;
 mod handler;
+mod mapper;
 mod model;
 mod repository;
 mod schemas;
+mod service;
 
 #[tokio::main]
 async fn main() {
@@ -29,11 +32,17 @@ async fn main() {
 
     // initialize logger
     env_logger::Builder::from_env(Env::default().default_filter_or("info")).init();
-    info!("Logger initialized with level \"{}\"", app_settings.log_level());
+    info!(
+        "Logger initialized with level \"{}\"",
+        app_settings.log_level()
+    );
 
     // establish db connection and run migrations
     let db_pool = establish_connection(app_settings.database_url().to_string());
-    info!("Database connection established at \"{}\"", app_settings.database_url());
+    info!(
+        "Database connection established at \"{}\"",
+        app_settings.database_url()
+    );
     run_pending_migrations(db_pool.get().unwrap());
     info!("Database migrations run");
 

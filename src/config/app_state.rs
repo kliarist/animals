@@ -1,5 +1,5 @@
-use diesel::PgConnection;
 use diesel::r2d2::ConnectionManager;
+use diesel::PgConnection;
 use r2d2::Pool;
 
 use crate::repository::db_animal_repository::DbAnimalRepository;
@@ -11,7 +11,6 @@ pub struct AppState {
 
 impl AppState {
     pub fn new(db_pool: Pool<ConnectionManager<PgConnection>>) -> Self {
-
         let animal_repository = DbAnimalRepository::new(db_pool);
 
         Self {

@@ -10,7 +10,7 @@ impl From<&Animal> for AnimalResponseDto {
             common_name: animal.common_name().to_string(),
             habitat: animal.habitat().to_string(),
             lifespan: animal.lifespan(),
-            is_endangered: animal.is_endangered()
+            is_endangered: animal.is_endangered(),
         }
     }
 }
@@ -23,7 +23,7 @@ impl From<&AnimalRequestDto> for Animal {
             request_dto.common_name().to_string(),
             request_dto.habitat().to_string(),
             request_dto.lifespan(),
-            request_dto.is_endangered()
+            request_dto.is_endangered(),
         )
     }
 }

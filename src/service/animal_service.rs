@@ -14,13 +14,17 @@ impl AnimalService {
     }
 
     pub fn find_by_id(&self, id: i32) -> Option<AnimalResponseDto> {
-        return self.repository
+        return self
+            .repository
             .find_by_id(id)
-            .map(|animal| { AnimalResponseDto::from(&animal) });
+            .map(|animal| AnimalResponseDto::from(&animal));
     }
 
     pub fn find_all(&self) -> Vec<AnimalResponseDto> {
-        return self.repository.find_all().iter()
+        return self
+            .repository
+            .find_all()
+            .iter()
             .map(|animal| AnimalResponseDto::from(animal))
             .collect();
     }
@@ -31,8 +35,9 @@ impl AnimalService {
     }
 
     pub fn delete_by_id(&mut self, id: i32) -> Option<AnimalResponseDto> {
-        return self.repository
+        return self
+            .repository
             .delete_by_id(id)
-            .map(|animal| { AnimalResponseDto::from(&animal) });
+            .map(|animal| AnimalResponseDto::from(&animal));
     }
 }
