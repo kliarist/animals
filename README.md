@@ -5,7 +5,7 @@ A rust crud rest api poc using:
 * axum
 * diesel
 * envconfig
-* env_logger
+* tracing
 * postgres
 
 ### Build
@@ -41,7 +41,7 @@ To build the docker image use `docker build -t animals-api .`.
 - [x] Connect to a database
 - [x] Externalise configuration/properties
 - [x] Dockerise
-- [x] Logging
+- [x] Logging/Tracing
 - [ ] Global and local api error handling
 - [ ] Add JWT security
 - [ ] Release process
@@ -54,6 +54,6 @@ To build the docker image use `docker build -t animals-api .`.
 
 ✓ [Envconfig](https://docs.rs/envconfig/latest/envconfig/)
 
-✓ [Env_logger](https://docs.rs/env_logger/0.10.0/env_logger/#)
+✓ [Tracing](https://docs.rs/tracing/latest/tracing/)
 
 
